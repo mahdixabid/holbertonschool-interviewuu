@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 
 
-
 def canUnlockAll(boxes):
     box = []
     for x in range(len(boxes)):
