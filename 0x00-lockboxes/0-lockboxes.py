@@ -1,19 +1,27 @@
 #!/usr/bin/python3
+'''Problem: You have n number of locked boxes in front of you.
+Each box is numbered sequentially from 0 to n - 1 and
+each box may contain keys to the other boxes.
+Write a method that determines if all the boxes can be opened.'''
 
 
 def canUnlockAll(boxes):
-    box = []
-    for x in range(len(boxes)):
-        box.append(False)
-    box[0] = True
-    box_key = [0]
+    if len(boxes) == 0:
+        return False
 
-    for j in box_key:
-        for i in boxes[j]:
-            if (i not in box_key and i < len(boxes)):
-                box[i] = True
-                box_key.append(i)
-    for k in range(0, len(boxes)):
-        if k not in box_key:
+    opened_boxes = [0, ]
+    number_of_boxes = len(boxes) - 1
+
+    '''iterate through the outer list, and inner lists.'''
+    for box in boxes:
+        if len(box) == 0:
             return False
-    return True
+        for key in box:
+            if key > 0 and key <= number_of_boxes:
+                if key in opened_boxes:
+                    continue
+                else:
+                    opened_boxes.append(key)
+                    if len(opened_boxes) == len(boxes):
+                        return True
+    return False
